@@ -1,0 +1,6 @@
+__pycache__
+avod/data
+*/__pycache__
+wavedata
+.idea
+venv
