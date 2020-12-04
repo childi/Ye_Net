@@ -4,3 +4,6 @@ avod/data
 wavedata
 .idea
 venv
+avod/protos/*pb2.py
+yolov3/mAP/mapp
+yolov3/data/dataset/ignore
