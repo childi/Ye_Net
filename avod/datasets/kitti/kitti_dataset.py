@@ -7,12 +7,9 @@ import os
 import numpy as np
 import cv2
 
-import sys
-sys.path.append('/home/zhangy/avod/wavedata')
 from wavedata.tools.core import calib_utils
 from wavedata.tools.obj_detection import obj_utils
 
-sys.path.append('/home/zhangy/avod')
 from avod.core import box_3d_encoder
 from avod.core import constants
 from avod.datasets.kitti import kitti_aug
@@ -222,7 +219,6 @@ class KittiDataset:
             the .txt file corresponding to the data split
         """
         set_file = self.dataset_dir + '/' + data_split + '.txt'
-        # set_file = '/home/zhangy/yolov3/scripts' + '/' + data_split + '.txt'
         with open(set_file, 'r') as f:
             sample_names = f.read().splitlines()
 

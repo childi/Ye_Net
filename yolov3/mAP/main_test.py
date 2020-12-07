@@ -6,6 +6,9 @@ import operator
 import sys
 import argparse
 
+ROOT_PATH = os.path.join(os.path.abspath(os.path.dirname(__file__)).split('avod')[0], 'avod')
+mAP_PATH = os.path.join(ROOT_PATH, 'yolov3/mAP')
+map_FILE_PATH = os.path.join(ROOT_PATH, 'map.txt')
 
 def map_test(globalstep):
 
@@ -283,10 +286,10 @@ def map_test(globalstep):
     """
      Create a "tmp_files/" and "results/" directory
     """
-    tmp_files_path = "/home/zhangy/yolov3/mAP/tmp_files"
+    tmp_files_path = os.path.join(mAP_PATH, "tmp_files")
     if not os.path.exists(tmp_files_path):  # if it doesn't exist already
         os.makedirs(tmp_files_path)
-    results_files_path = "/home/zhangy/yolov3/mAP/results"
+    results_files_path = os.path.join(mAP_PATH, "results")
     if os.path.exists(results_files_path):  # if it exist already
         # reset the results directory
         shutil.rmtree(results_files_path)
@@ -304,7 +307,7 @@ def map_test(globalstep):
        Create a list of all the class names present in the ground-truth (gt_classes).
     """
     # get a list with the ground-truth files
-    ground_truth_files_list = glob.glob('/home/zhangy/yolov3/mAP/ground-truth1/*.txt')
+    ground_truth_files_list = glob.glob(os.path.join(mAP_PATH, 'ground-truth1/*.txt'))
     if len(ground_truth_files_list) == 0:
         error("Error: No ground-truth files found!")
     ground_truth_files_list.sort()
@@ -316,7 +319,7 @@ def map_test(globalstep):
         file_id = txt_file.split(".txt", 1)[0]
         file_id = os.path.basename(os.path.normpath(file_id))
         # check if there is a correspondent predicted objects file
-        if not os.path.exists('/home/zhangy/yolov3/mAP/predicted' + globalstep + '/' + file_id + ".txt"):
+        if not os.path.exists(os.path.join(mAP_PATH, 'predicted') + globalstep + '/' + file_id + ".txt"):
             error_msg = "Error. File not found: predicted" + globalstep + '/' + file_id + ".txt\n"
             error_msg += "(You can avoid this error message by running extra/intersect-gt-and-pred.py)"
             error(error_msg)
@@ -365,7 +368,7 @@ def map_test(globalstep):
     n_classes = len(gt_classes)
     # print(gt_classes)
     # print(gt_counter_per_class)
-    f = open('/home/zhangy/map.txt', 'a', encoding='utf-8')
+    f = open(map_FILE_PATH, 'a', encoding='utf-8')
     print('gt car num: %d   ' % (nn), end='', file=f)
     """
      Check format of the flag --set-class-iou (if used)
@@ -396,7 +399,7 @@ def map_test(globalstep):
        Load each of the predicted files into a temporary ".json" file.
     """
     # get a list with the predicted files
-    predicted_files_list = glob.glob('/home/zhangy/yolov3/mAP/predicted' + globalstep + '/*.txt')
+    predicted_files_list = glob.glob(os.path.join(mAP_PATH, 'predicted') + globalstep + '/*.txt')
     predicted_files_list.sort()
 
     for class_index, class_name in enumerate(gt_classes):
@@ -407,7 +410,7 @@ def map_test(globalstep):
             file_id = txt_file.split(".txt", 1)[0]
             file_id = os.path.basename(os.path.normpath(file_id))
             if class_index == 0:
-                if not os.path.exists('/home/zhangy/yolov3/mAP/ground-truth1/' + file_id + ".txt"):
+                if not os.path.exists(os.path.join(mAP_PATH, 'ground-truth1/') + file_id + ".txt"):
                     error_msg = "Error. File not found: ground-truth_val/" + file_id + ".txt\n"
                     error_msg += "(You can avoid this error message by running extra/intersect-gt-and-pred.py)"
                     error(error_msg)
@@ -624,7 +627,7 @@ def map_test(globalstep):
             results_file.write(
                 text + "\n Precision: " + str(rounded_prec) + "\n Recall   :" + str(rounded_rec) + "\n\n")
             if not quiet:
-                f = open('/home/zhangy/map.txt', 'a', encoding='utf-8')
+                f = open(map_FILE_PATH, 'a', encoding='utf-8')
                 print(text, end='', file=f)
             ap_dictionary[class_name] = ap
 
@@ -666,7 +669,7 @@ def map_test(globalstep):
         mAP = sum_AP / n_classes
         text = "mAP = {0:.2f}%".format(mAP * 100)
         results_file.write(text + "\n")
-        f = open('/home/zhangy/map.txt', 'a', encoding='utf-8')
+        f = open(map_FILE_PATH, 'a', encoding='utf-8')
         print(text, file=f)
 
     # remove the tmp_files directory
@@ -766,7 +769,7 @@ def map_test(globalstep):
     """
      Write number of predicted objects per class to results.txt
     """
-    f = open('/home/zhangy/map.txt', 'a', encoding='utf-8')
+    f = open(map_FILE_PATH, 'a', encoding='utf-8')
     with open(results_files_path + "/results.txt", 'a') as results_file:
         results_file.write("\n# Number of predicted objects per class\n")
         for class_name in sorted(pred_classes):
@@ -807,7 +810,7 @@ def map_test(globalstep):
 
 if __name__ == '__main__':
     global_step = 74063
-    f = open('/home/zhangy/map.txt', 'a', encoding='utf-8')
+    f = open(map_FILE_PATH, 'a', encoding='utf-8')
     print('Step {},'.format(global_step), file=f)
     f.close()
     map_test(str(global_step))

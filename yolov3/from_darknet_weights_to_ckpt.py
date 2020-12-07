@@ -1,5 +1,5 @@
 import tensorflow as tf
-from core.yolov3 import YOLOV3
+from yolov3.core.yolov3 import YOLOV3
 
 iput_size = 416
 darknet_weights = '<your yolov3.weights path>'

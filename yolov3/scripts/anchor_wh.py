@@ -219,7 +219,7 @@ def compute_centroids(label_path,n_anchors,loss_convergence,grid_size,iterations
     plt.show()
 
 
-label_path = "/home/zhangy/yolov3/data/dataset/kitti_train11.txt"
+label_path = "../data/dataset/kitti_train.txt"
 n_anchors = 9
 loss_convergence = 1e-6
 grid_size = 13

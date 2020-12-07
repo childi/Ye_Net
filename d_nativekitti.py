@@ -5,14 +5,13 @@ import numpy as np
 from PIL import Image
 import matplotlib.pyplot as plt
 import sys
-sys.path.append('/home/zhangy/avod')
 from avod.core import proposal2bbox
-sys.path.append('/home/zhangy/avod/avod/data/outputs/pyramid_cars_with_aug_example/predictions/kitti_native_eval')
+sys.path.append('./avod/data/outputs/pyramid_cars_with_aug_example/predictions/kitti_native_eval')
 from wujx import Calibration
 from xiezz import box_from_gt_label, box_from_pred_label, vis_labels
 
-# dir_path = '/home/zhangy/avod/avod/data/outputs/pyramid_cars_with_aug_example/predictions/kitti_native_eval/0.1_gen/01/data'
-dir_path = '/home/zhangy/avod/avod/data/outputs/pyramid_cars_with_aug_example/predictions/kitti_native_eval/0.1_0905/148126/data'
+# dir_path = './avod/data/outputs/pyramid_cars_with_aug_example/predictions/kitti_native_eval/0.1_gen/01/data'
+dir_path = './avod/data/outputs/pyramid_cars_with_aug_example/predictions/kitti_native_eval/0.1_11z0905/148126/data'
 gt_dir_path = '/media/dataset/Kitti/object/training/label_2'
 calib_dir_path = '/media/dataset/Kitti/object/training/calib'
 files = os.listdir(path=dir_path)
@@ -76,8 +75,8 @@ for obj_gt_list in file_pred_list:
     calib_path = gt_label_path.replace('label_2', 'calib')
     calibs = Calibration(calib_path)
     gt_boxes = box_from_gt_label(gt_label_path, calibs)
-    pred_label_path = '/home/zhangy/avod/avod/data/outputs/pyramid_cars_with_aug_example/predictions/' \
-                      'kitti_native_eval/0.1_0905/148126/data/' + '%s.txt' % filename
+    pred_label_path = './avod/data/outputs/pyramid_cars_with_aug_example/predictions/' \
+                      'kitti_native_eval/0.1_11z0905/148126/data/' + '%s.txt' % filename
     pred_boxes = box_from_pred_label(pred_label_path, calibs)
     for obj_gt in obj_gt_list:
         if obj_gt.difficulty >= 3.0:
@@ -90,7 +89,7 @@ for obj_gt_list in file_pred_list:
             # obj_tmp_list.append(obj_gt)
             hi_scores.append(obj_gt.score)
     # proposal2bbox.GS3D().draw3dbox_xz(a, file_gt_list[a], obj_tmp_list, [])
-    # img = Image.open('/home/zhangy/yolov3/data/detection2d_img/%s.png' % files[a].split('.')[0])
+    # img = Image.open('./yolov3/data/detection2d_img/%s.png' % files[a].split('.')[0])
     # plt.figure("%s" % files[a])
     # plt.imshow(img)
     # plt.show()

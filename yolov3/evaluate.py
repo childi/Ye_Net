@@ -16,10 +16,10 @@ import os
 import shutil
 import numpy as np
 import tensorflow as tf
-import core.utils as utils
-from core.config import cfg
-from core.yolov3_z import YOLOV3
-from core.dataset import Dataset
+import yolov3.core.utils as utils
+from yolov3.core.config import cfg
+from yolov3.core.yolov3_z import YOLOV3
+from yolov3.core.dataset import Dataset
 os.environ['CUDA_VISIBLE_DEVICES'] = '3'
 
 

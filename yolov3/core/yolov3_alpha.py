@@ -3,13 +3,11 @@
 
 import numpy as np
 import tensorflow as tf
-# import torch
-import sys
-sys.path.append('/home/zhangy/yolov3')
-import core.utils as utils
-import core.common as common
-import core.backbone as backbone
-from core.config import cfg
+
+import yolov3.core.utils as utils
+import yolov3.core.common as common
+import yolov3.core.backbone as backbone
+from yolov3.core.config import cfg
 
 
 class YOLOV3(object):

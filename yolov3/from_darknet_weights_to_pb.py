@@ -1,5 +1,5 @@
 import tensorflow as tf
-from core.yolov3 import YOLOV3
+from yolov3.core.yolov3 import YOLOV3
 from from_darknet_weights_to_ckpt import load_weights
 
 input_size = 416

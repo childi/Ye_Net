@@ -220,8 +220,8 @@ def train(model, train_config):
     # Main Training Loop
     last_time = time.time()
 
-    predicted_dir_path = '/home/zhangy/yolov3/mAP/predicted'
-    ground_truth_dir_path = '/home/zhangy/yolov3/mAP/ground-truth'
+    predicted_dir_path = '../../yolov3/mAP/predicted'
+    ground_truth_dir_path = '../../yolov3/mAP/ground-truth'
     if os.path.exists(predicted_dir_path): shutil.rmtree(predicted_dir_path)
     if os.path.exists(ground_truth_dir_path): shutil.rmtree(ground_truth_dir_path)
     os.mkdir(predicted_dir_path)

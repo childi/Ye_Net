@@ -16,9 +16,6 @@ from avod.core.models.avod_model import AvodModel
 from avod.core.models.rpn_model import RpnModel
 from avod.core import trainer
 
-# import sys
-# sys.path.append('/home/zhangy/yolov3')
-# from mAP.main_test import map_test
 
 tf.logging.set_verbosity(tf.logging.ERROR)
 

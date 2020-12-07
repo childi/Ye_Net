@@ -14,7 +14,7 @@
 import cv2
 import time
 import numpy as np
-import core.utils as utils
+import yolov3.core.utils as utils
 import tensorflow as tf
 from PIL import Image
 

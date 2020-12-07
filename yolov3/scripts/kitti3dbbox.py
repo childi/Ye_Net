@@ -5,6 +5,7 @@ import os
 import argparse
 
 # import train_val
+ROOT_PATH = os.path.join(os.path.abspath(os.path.dirname(__file__)).split('avod')[0], 'avod')
 
 
 def convert_voc_annotation(data_path, data_type, anno_path):
@@ -48,8 +49,8 @@ def convert_voc_annotation(data_path, data_type, anno_path):
 # if __name__ == '__main__':
 #     parser = argparse.ArgumentParser()
 #     parser.add_argument("--data_path", default="/media/dataset/Kitti/object/")
-#     parser.add_argument("--train_annotation", default="/home/zhangy/yolov3/data/dataset/kitti_train3d.txt")
-#     parser.add_argument("--test_annotation",  default="/home/zhangy/yolov3/data/dataset/kitti_test3d.txt")
+#     parser.add_argument("--train_annotation", default=os.path.join(ROOT_PATH, "yolov3/data/dataset/kitti_train3d.txt"))
+#     parser.add_argument("--test_annotation",  default=os.path.join(ROOT_PATH, "yolov3/data/dataset/kitti_test3d.txt"))
 #     flags = parser.parse_args()
 #
 #     if os.path.exists(flags.train_annotation):os.remove(flags.train_annotation)
@@ -109,10 +110,10 @@ def convert_voc_annotation(data_path, data_type, anno_path):
 # if __name__ == '__main__':
 #     parser = argparse.ArgumentParser()
 #     parser.add_argument("--data_path", default="/media/dataset/Kitti/object/")
-#     parser.add_argument("--train_annotation", default="/home/zhangy/prim_train.txt")
-#     parser.add_argument("--test_annotation",  default="/home/zhangy/prim_test.txt")
-#     parser.add_argument("--train_file", default="/home/zhangy/yolov3/mAP/predicted_trainprim")
-#     parser.add_argument("--test_file", default="/home/zhangy/yolov3/mAP/predicted_prim")
+#     parser.add_argument("--train_annotation", default=os.path.join(ROOT_PATH, "prim_train.txt"))
+#     parser.add_argument("--test_annotation",  default=os.path.join(ROOT_PATH, "prim_test.txt"))
+#     parser.add_argument("--train_file", default=os.path.join(ROOT_PATH, "yolov3/mAP/predicted_trainprim"))
+#     parser.add_argument("--test_file", default=os.path.join(ROOT_PATH, "yolov3/mAP/predicted_prim"))
 #     flags = parser.parse_args()
 #
 #     if os.path.exists(flags.train_file): shutil.rmtree(flags.train_file)
@@ -160,10 +161,10 @@ def convert_voc_annotation(data_path, data_type, anno_path):
 # if __name__ == '__main__':
 #     parser = argparse.ArgumentParser()
 #     parser.add_argument("--data_path", default="/media/dataset/Kitti/object/")
-#     parser.add_argument("--train_annotation", default="/home/zhangy/pred_train.txt")
-#     parser.add_argument("--test_annotation",  default="/home/zhangy/pred_test.txt")
-#     parser.add_argument("--train_file", default="/home/zhangy/yolov3/mAP/predicted_train11z_0.1")
-#     parser.add_argument("--test_file", default="/home/zhangy/yolov3/mAP/predicted11z_0.1")
+#     parser.add_argument("--train_annotation", default=os.path.join(ROOT_PATH, "pred_train.txt"))
+#     parser.add_argument("--test_annotation",  default=os.path.join(ROOT_PATH, "pred_test.txt"))
+#     parser.add_argument("--train_file", default=os.path.join(ROOT_PATH, "yolov3/mAP/predicted_train11z_0.1"))
+#     parser.add_argument("--test_file", default=os.path.join(ROOT_PATH, "yolov3/mAP/predicted11z_0.1"))
 #     flags = parser.parse_args()
 #
 #     if os.path.exists(flags.train_annotation): os.remove(flags.train_annotation)
@@ -205,8 +206,9 @@ def convert_voc_annotation(data_path, data_type, anno_path):
 # if __name__ == '__main__':
 #     parser = argparse.ArgumentParser()
 #     parser.add_argument("--data_path", default="/media/dataset/Kitti/object/")
-#     parser.add_argument("--annotation", default="/home/zhangy/yolov3/mAP/predicted11z/")
-#     parser.add_argument("--file", default="/home/zhangy/avod/avod/data/outputs/pyramid_cars_with_aug_example/predictions/kitti_native_eval/0.1/6733/data/")
+#     parser.add_argument("--annotation", default=os.path.join(ROOT_PATH, "yolov3/mAP/predicted11z/"))
+#     parser.add_argument("--file", default=os.path.join(ROOT_PATH, "/avod/data/outputs/pyramid_cars_with_aug_example/"
+#                                                                   "predictions/kitti_native_eval/0.1/6733/data/"))
 #     flags = parser.parse_args()
 #
 #     convert_voc_annotation(flags.data_path, 'val', flags.annotation, flags.file)

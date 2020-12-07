@@ -13,7 +13,7 @@
 
 import cv2
 import numpy as np
-import core.utils as utils
+import yolov3.core.utils as utils
 import tensorflow as tf
 from PIL import Image
 

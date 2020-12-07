@@ -13,8 +13,8 @@
 
 import argparse
 import tensorflow as tf
-from core.yolov3 import YOLOV3
-from core.config import cfg
+from yolov3.core.yolov3 import YOLOV3
+from yolov3.core.config import cfg
 parser = argparse.ArgumentParser()
 parser.add_argument("--train_from_coco", action='store_true')
 flag = parser.parse_args()

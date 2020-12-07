@@ -28,12 +28,12 @@ alpha_out_list = [[] for _ in range(len(classes))]  # z_gt
 alpha_pred_list = [[] for _ in range(len(classes))]  # z_pred
 h_list = [[] for _ in range(len(classes))]
 # use kitti_test.txt as gt
-# with open('/home/zhangy/yolov3/data/dataset/kitti_test.txt', 'r') as annotation_file:
+# with open('../data/dataset/kitti_test.txt', 'r') as annotation_file:
 #     for num, line in enumerate(annotation_file):
 #         annotation = line.strip().split()
 #         bbox_data_gt = np.array([list(map(float, box.split(','))) for box in annotation[1:]])
 #
-#         PRED_path = os.path.join('/home/zhangy/yolov3/mAP/predicted/', str(num) + '.txt')
+#         PRED_path = os.path.join('../mAP/predicted/', str(num) + '.txt')
 #         with open(PRED_path, 'r') as pred:
 #             pred = pred.readlines()
 #             pred_file = [line.strip() for line in pred]
@@ -54,17 +54,17 @@ h_list = [[] for _ in range(len(classes))]
 #                 alpha_list[int(bbox_data_gt[id-1][4])].append(alpha)
 
 # use /ground-truth as gt
-ground_truth_files_list = glob.glob('/home/zhangy/yolov3/mAP/ground-truth11za/*.txt')  # /media/personal_data/zhangye/outputs/pyramid_cars_with_aug_example
+ground_truth_files_list = glob.glob('../mAP/ground-truth11/*.txt')  # /media/personal_data/zhangye/outputs/pyramid_cars_with_aug_example
 ground_truth_files_list.sort()
 for txt_file in ground_truth_files_list:
     file_id = txt_file.split(".txt", 1)[0]
     file_id = os.path.basename(os.path.normpath(file_id))
-    GT_path = os.path.join('/home/zhangy/yolov3/mAP/ground-truth11za/' + file_id + ".txt")
+    GT_path = os.path.join('../mAP/ground-truth11/' + file_id + ".txt")
     with open(GT_path, 'r') as gt:
         gt = gt.readlines()
         gt_file = [line.strip() for line in gt]
 
-        PRED_path = os.path.join('/home/zhangy/yolov3/mAP/predicted11za/', str(file_id) + '.txt')
+        PRED_path = os.path.join('../mAP/predicted11/', str(file_id) + '.txt')
         with open(PRED_path, 'r') as pred:
             pred = pred.readlines()
             pred_file = [line.strip() for line in pred]

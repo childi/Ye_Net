@@ -17,10 +17,8 @@ from avod.core import trainer_utils
 from avod.core.models.avod_model import AvodModel
 from avod.core.models.rpn_model import RpnModel
 
-import sys
-sys.path.append('/home/zhangy/yolov3')
-from mAP.main_test import map_test
-import core.utils as utils
+from yolov3.mAP.main_test import map_test
+import yolov3.core.utils as utils
 
 tf.logging.set_verbosity(tf.logging.INFO)
 
@@ -187,7 +185,7 @@ class Evaluator:
         # prop_score_predictions_dir = predictions_base_dir + \
         #     "/proposals_and_scores/{}/{}".format(
         #         data_split, global_step)
-        # prop_score_predictions_dir = "/home/zhangy/yolov3/mAP/predicted{}/".format(global_step)
+        # prop_score_predictions_dir = "yolov3/mAP/predicted{}/".format(global_step)
         # trainer_utils.create_dir(prop_score_predictions_dir)
 
         if self.full_model:
@@ -217,7 +215,7 @@ class Evaluator:
         # Keep track of feed_dict and inference time
         total_feed_dict_time = []
         total_inference_time = []
-        # set_file = '/home/zhangy/yolov3/scripts' + '/' + data_split + '.txt'
+        # set_file = '../../yolov3/scripts' + '/' + data_split + '.txt'
         # with open(set_file, 'r') as f:
         #     sample_names = f.read().splitlines()
         # sample_names = np.array(sample_names)
@@ -372,7 +370,7 @@ class Evaluator:
             # Test mode --> train_val_test == 'test'
             evaluator_utils.print_inference_time_statistics(
                 total_feed_dict_time, total_inference_time)
-        # f = open('/home/zhangy/map.txt', 'a', encoding='utf-8')
+        # f = open('../../../map.txt', 'a', encoding='utf-8')
         # print('Step {},'.format(global_step), file=f)
         # f.close()
         # map_test(str(global_step))
@@ -491,7 +489,7 @@ class Evaluator:
                                 self.checkpoint_dir,
                                 self.eval_wait_interval)
             else:
-                for ckpt_idx in range(50, num_checkpoints+1):
+                for ckpt_idx in range(1, num_checkpoints+1):
                     # checkpoint_to_restore = \
                     #     self._saver.last_checkpoints[ckpt_idx]
                     checkpoint_to_restore = '/media/personal_data/zhangye/outputs/' + self.model_config.checkpoint_name +\

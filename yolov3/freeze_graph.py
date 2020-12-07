@@ -13,7 +13,7 @@
 
 
 import tensorflow as tf
-from core.yolov3 import YOLOV3
+from yolov3.core.yolov3 import YOLOV3
 
 pb_file = "./yolov3_coco.pb"
 ckpt_file = "./checkpoint/yolov3_coco_demo.ckpt"

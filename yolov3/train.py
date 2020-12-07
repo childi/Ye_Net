@@ -16,11 +16,11 @@ import time
 import shutil
 import numpy as np
 import tensorflow as tf
-import core.utils as utils
+import yolov3.core.utils as utils
 from tqdm import tqdm
-from core.dataset import Dataset
-from core.yolov3_z import YOLOV3
-from core.config import cfg
+from yolov3.core.dataset import Dataset
+from yolov3.core.yolov3_z import YOLOV3
+from yolov3.core.config import cfg
 os.environ['CUDA_VISIBLE_DEVICES'] = '2'
 
 
@@ -145,7 +145,7 @@ class YoloTrain(object):
             print('=> Now it starts to train YOLOV3 from scratch ...')
             self.first_stage_epochs = 0
 
-        logdir_path = '/home/zhangy/yolov3/data/logdir.txt'
+        logdir_path = './data/logdir.txt'
         if os.path.exists(logdir_path): os.remove(logdir_path)
 
         for epoch in range(1, 1+self.first_stage_epochs+self.second_stage_epochs):

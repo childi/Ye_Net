@@ -7,16 +7,12 @@ import math
 import heapq
 from collections import Counter
 
-import sys
-sys.path.append('/home/zhangy/yolov3')
-import core.utils as utils
-sys.path.append('/home/zhangy/avod')
+import yolov3.core.utils as utils
 from avod.core import anchor_projector
 from avod.core import box_list
 from avod.core import box_list_ops
 from avod.core import box_3d_encoder
 from avod.core import box_3d_projector
-sys.path.append('/home/zhangy/avod/wavedata')
 # from wavedata.tools.core import calib_utils
 from wavedata.tools.obj_detection import obj_utils
 from wavedata.tools.visualization import vis_utils
@@ -25,7 +21,6 @@ from wavedata.tools.visualization import vis_utils
 # base = evaluate.YoloTest()
 
 # plt.switch_backend('agg')
-
 
 class GS3D(object):
     '''
@@ -37,20 +32,20 @@ class GS3D(object):
     '''
     def __init__(self):
         self.classes = ['Car', 'Pedestrian', 'Cyclist']
-        self.gt2d_dir = "/home/zhangy/yolov3/data/dataset/kitti_test.txt"
+        self.gt2d_dir = "../../yolov3/data/dataset/kitti_test.txt"
         # TODO:When proposal changes from gt to predicted, 2d path=base.write_image_path
-        self.write_prps_img_path = '/home/zhangy/yolov3/data/detection2d_img/'
-        self.write_genpredgt3d_2bev_path = '/home/zhangy/yolov3/data/detection3d_2bev/'
-        self.write_gengt3d_img_path = '/home/zhangy/yolov3/data/detection3d_img/'
-        self.write_prps_img_genpredgt3d_2img_path = '/home/zhangy/yolov3/data/detection_img/'
+        self.write_prps_img_path = '../../yolov3/data/detection2d_img/'
+        self.write_genpredgt3d_2bev_path = '../../yolov3/data/detection3d_2bev/'
+        self.write_gengt3d_img_path = '../../yolov3/data/detection3d_img/'
+        self.write_prps_img_genpredgt3d_2img_path = './yolov3/data/detection_img/'
         self.calib_dir = '/media/dataset/Kitti/object/training/calib/'
         self.label_dir = '/media/dataset/Kitti/object/training/label_2/'
-        self.prps_dir = '/home/zhangy/yolov3/mAP/predicted3d_2d_0.1/'
-        # self.prps_dir01 = '/home/zhangy/yolov3/mAP/predicted0.2/'
-        # self.pred_dir = '/home/zhangy/avod/avod/data/outputs/pyramid_cars_with_aug_example/' \
+        self.prps_dir = '../../yolov3/mAP/mapp/predicted11z_0.1/'
+        # self.prps_dir01 = 'yolov3/mAP/predicted0.2/'
+        # self.pred_dir = 'avod/data/outputs/pyramid_cars_with_aug_example/' \
         #                 'predictions/kitti_native_eval/0.1_0830fp/249121/data'
-        # self.write_gen_2bev_path = '/home/zhangy/yolov3/mAP/predicted_bev/'
-        self.write_gen_2native_path = '/home/zhangy/avod/avod/data/outputs/pyramid_cars_with_aug_example/predictions/' \
+        # self.write_gen_2bev_path = 'yolov3/mAP/predicted_bev/'
+        self.write_gen_2native_path = 'avod/data/outputs/pyramid_cars_with_aug_example/predictions/' \
                                       'kitti_native_eval/0.1_gen/32zz_all1/'
 
     def proposal2bbox(self, box2, classid, stereo_calib, sample_name, score=None, z=None,
@@ -325,7 +320,7 @@ class GS3D(object):
             # Draw gen 3D boxes
             vis_utils.draw_box_3d(ax2, obj, p2)
 
-        # TODO:save 3d box picture√
+
         gen_3d_path = os.path.join(self.write_gengt3d_img_path, str(img_idx) + '.png')
         plt.savefig(gen_3d_path)
 
@@ -360,7 +355,7 @@ class GS3D(object):
             # Draw pred 3D boxes
             vis_utils.draw_rot_rec(ax, box, obj_mode=False, linewidth=1, color='g')  #
 
-        # TODO:save 2d_bev box picture
+
         gen_bev_path = os.path.join(self.write_genpredgt3d_2bev_path, str(img_idx) + '.png')
         plt.savefig(gen_bev_path)
 
@@ -455,11 +450,11 @@ class GS3D(object):
         os.mkdir(self.write_gengt3d_img_path)
         # if os.path.exists(self.write_gen_2bev_path): shutil.rmtree(self.write_gen_2bev_path)
         # os.mkdir(self.write_gen_2bev_path)
-        if os.path.exists(self.write_gen_2native_path): shutil.rmtree(self.write_gen_2native_path)
-        os.mkdir(self.write_gen_2native_path)
-        os.mkdir(self.write_gen_2native_path + 'data/')
+        # if os.path.exists(self.write_gen_2native_path): shutil.rmtree(self.write_gen_2native_path)
+        # os.mkdir(self.write_gen_2native_path)
+        # os.mkdir(self.write_gen_2native_path + 'data/')
         iou_threshold_list = []
-        # f=open("/home/zhangy/yolov3/data/dataset/kitti_train3d_2d.txt", 'a')
+        # f=open("yolov3/data/dataset/kitti_train3d_2d.txt", 'a')
         with open(self.gt2d_dir, 'r') as annotation_file:
             for num, line in enumerate(annotation_file):
                 annotation = line.strip().split()
@@ -472,7 +467,7 @@ class GS3D(object):
                 image = cv2.imread(image_path)
 
                 # TODO:proposal
-                # 11 kitti gt 2d box(compare with gt 3d)√
+                # 11 kitti gt 2d box(compare with gt 3d)
                 bbox_data_gt = np.array([list(map(float, box.split(','))) for box in annotation[1:]])
                 if len(bbox_data_gt) == 0:
                     bboxes_gt, classes_gt, alpha_gt= [], [], []
@@ -523,7 +518,7 @@ class GS3D(object):
                 #             # alpha.append(box.split()[6])
                 #             z01.append(box.split()[6])
 
-                # reading calibration file from kitti dataset√
+                # reading calibration file from kitti dataset
                 calib_path = os.path.join(self.calib_dir, image_first_name + '.txt')
                 calib_data = []
                 with open(calib_path, 'r') as calib_file:
@@ -535,7 +530,7 @@ class GS3D(object):
                     calib_file.close()
                 # velo2pixel = self.calibration(p2, R0, velo_to_cam)
 
-                # 2d~~~~>3d√
+                # 2d~~~~>3d
                 # if score is not None:
                 #     self.gen_2bev = os.path.join(self.write_gen_2bev_path, str(image_first_name) + '.txt')
                 #     if os.path.exists(self.gen_2bev): shutil.rmtree(self.gen_2bev)
@@ -551,42 +546,42 @@ class GS3D(object):
 
                 # gen --> 2img
                 # ^target rotation is considered(but the box generated by gs3d has no Angle)
-                h, w, _ = image.shape
-                box_3d_2anchor = box_3d_encoder.box_3d_to_anchor(box_3d_list)
-                gen_2img, _ = anchor_projector.project_to_image_space(box_3d_2anchor, p2, [h, w])
+                # h, w, _ = image.shape
+                # box_3d_2anchor = box_3d_encoder.box_3d_to_anchor(box_3d_list)
+                # gen_2img, _ = anchor_projector.project_to_image_space(box_3d_2anchor, p2, [h, w])
 
                 ######
                 # gen --> 2kitti_native
                 ######
                 # (N, 16) is allocated but only values [4:16] are used
-                kitti_predictions = np.zeros([len(box_3d_2anchor), 16])
-                # Get object types
-                obj_types = ['Car'] * len(box_3d_2anchor)
-                # Alpha (Not computed)
-                kitti_predictions[:, 3] = -10 * np.ones((len(box_3d_2anchor)), dtype=np.int32)
-                # 2D predictions
-                kitti_predictions[:, 4:8] = gen_2img[:, 0:4]
-                # 3D predictions
-                # (l, w, h)
-                kitti_predictions[:, 8] = box_3d_2anchor[:, 4]
-                kitti_predictions[:, 9] = box_3d_2anchor[:, 5]
-                kitti_predictions[:, 10] = box_3d_2anchor[:, 3]
-                # (x, y, z)
-                kitti_predictions[:, 11:14] = box_3d_2anchor[:, 0:3]
-                # (ry, score)
-                # kitti_predictions[:, 14] = box_3d_list[:, 6]
-                kitti_predictions[:, 15] = box_gen_score
-                # Round detections to 3 decimal places
-                kitti_predictions = np.round(kitti_predictions, 3)
-                # Empty Truncation, Occlusion
-                kitti_empty_1 = -1 * np.ones((len(box_3d_list), 2), dtype=np.int32)
-                # Stack 3D predictions text
-                kitti_text_3d = np.column_stack([obj_types, kitti_empty_1, kitti_predictions[:, 3:16]])
-                # Save to text files
-                np.savetxt(self.write_gen_2native_path + 'data/' + image_first_name + '.txt', kitti_text_3d,
-                           newline='\r\n', fmt='%s')
+                # kitti_predictions = np.zeros([len(box_3d_2anchor), 16])
+                # # Get object types
+                # obj_types = ['Car'] * len(box_3d_2anchor)
+                # # Alpha (Not computed)
+                # kitti_predictions[:, 3] = -10 * np.ones((len(box_3d_2anchor)), dtype=np.int32)
+                # # 2D predictions
+                # kitti_predictions[:, 4:8] = gen_2img[:, 0:4]
+                # # 3D predictions
+                # # (l, w, h)
+                # kitti_predictions[:, 8] = box_3d_2anchor[:, 4]
+                # kitti_predictions[:, 9] = box_3d_2anchor[:, 5]
+                # kitti_predictions[:, 10] = box_3d_2anchor[:, 3]
+                # # (x, y, z)
+                # kitti_predictions[:, 11:14] = box_3d_2anchor[:, 0:3]
+                # # (ry, score)
+                # # kitti_predictions[:, 14] = box_3d_list[:, 6]
+                # kitti_predictions[:, 15] = box_gen_score
+                # # Round detections to 3 decimal places
+                # kitti_predictions = np.round(kitti_predictions, 3)
+                # # Empty Truncation, Occlusion
+                # kitti_empty_1 = -1 * np.ones((len(box_3d_list), 2), dtype=np.int32)
+                # # Stack 3D predictions text
+                # kitti_text_3d = np.column_stack([obj_types, kitti_empty_1, kitti_predictions[:, 3:16]])
+                # # Save to text files
+                # np.savetxt(self.write_gen_2native_path + 'data/' + image_first_name + '.txt', kitti_text_3d,
+                #            newline='\r\n', fmt='%s')
 
-                # 3d√
+                # 3d
                 box_gt = obj_utils.read_labels(self.label_dir, int(image_first_name))
                 # gt_3d_list = []
                 # for obj in box_gt:
@@ -640,7 +635,7 @@ class GS3D(object):
                 #                 classes_avod_2img.append(str(classid))
 
                 # validation
-                # # 2d√
+                # # 2d
                 # image1 = utils.draw2dbox(image, bboxes_gt, classes_gt, colors=[(0, 255, 0)], show_label=None)  # 'gt'
                 # image = utils.draw2dbox(image, proposal, classes, colors=[(255, 0, 255)], show_label='prps')
                 # image = utils.draw2dbox(image, proposal01, classes01, colors=[(0, 0, 255)], show_label='prps0.3')

@@ -5,7 +5,7 @@ n = 0
 m = 0
 l = 0
 alpha_list = []
-with open('/home/zhangy/yolov3/data/dataset/kitti_test11.txt', 'r') as f:
+with open('../data/dataset/kitti_test.txt', 'r') as f:
     txt = f.readlines()
     for line in txt:
         ann = line.split()[1:]

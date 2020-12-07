@@ -16,7 +16,7 @@ import random
 import colorsys
 import numpy as np
 import tensorflow as tf
-from core.config import cfg
+from yolov3.core.config import cfg
 
 def read_class_names(class_file_name):
     '''loads class name from a file'''

@@ -26,17 +26,17 @@ h_list = [[] for _ in range(len(classes))]
 z_pred_list = [[] for _ in range(len(classes))]  # z_pred
 
 # use /ground-truth as gt
-ground_truth_files_list = glob.glob('/home/zhangy/yolov3/mAP/ground-truth11z/*.txt')  # /media/personal_data/zhangye/outputs/pyramid_cars_with_aug_example
+ground_truth_files_list = glob.glob('../mAP/mapp/ground-truth11z/*.txt')  # /media/personal_data/zhangye/outputs/pyramid_cars_with_aug_example
 ground_truth_files_list.sort()
 for txt_file in ground_truth_files_list:
     file_id = txt_file.split(".txt", 1)[0]
     file_id = os.path.basename(os.path.normpath(file_id))
-    GT_path = os.path.join('/home/zhangy/yolov3/mAP/ground-truth11z/' + file_id + ".txt")  # '000091'
+    GT_path = os.path.join('../mAP/mapp/ground-truth11z/' + file_id + ".txt")  # '000091'
     with open(GT_path, 'r') as gt:
         gt = gt.readlines()
         gt_file = [line.strip() for line in gt]
 
-        PRED_path = os.path.join('/home/zhangy/yolov3/mAP/predicted_wod/' + file_id + ".txt")  # '%06d.txt' % int(file_id)
+        PRED_path = os.path.join('../mAP/mapp/predictedzz_0.1/' + file_id + ".txt")  # '%06d.txt' % int(file_id)
         with open(PRED_path, 'r') as pred:
             pred = pred.readlines()
             pred_file = [line.strip() for line in pred]

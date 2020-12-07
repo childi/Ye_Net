@@ -1,6 +1,8 @@
 import matplotlib.pyplot as plt
+import os
 
-# with open('/home/zhangy/map.txt', 'r') as file:
+ROOT_PATH = os.path.abspath(os.path.dirname(__file__)).split('avod')[0]
+# with open(os.path.join(ROOT_PATH, 'map.txt'), 'r') as file:
 #   ann = file.readlines()
 #   steps = []
 #   mAP = []
@@ -16,7 +18,7 @@ import matplotlib.pyplot as plt
 #       recall = ann[i].split()[2].split('%')[0]
 #       recalls.append(float(recall))
 #
-# with open('/home/zhangy/ap.txt', 'r') as file:
+# with open(os.path.join(ROOT_PATH, 'map.txt'), 'r') as file:
 #   anna = file.readlines()
 #   AP2 = []
 #   APb = []
@@ -52,12 +54,12 @@ import matplotlib.pyplot as plt
 steps = [i*6733 for i in range(1, 51)]
 file_name = ['ap11.txt', 'apzz.txt', 'ap11_mutiply.txt', 'apzz2dupdate.txt', 'ap32zz.txt', 'apgtz.txt', 'ap_az1.txt']
 color = ['black', 'red', 'orange', 'green', 'blue', 'purple', 'yellow']
-line_num = 4
+line_num = 3
 AP2 = [[] for i in range(line_num)]
 APb = [[] for i in range(line_num)]
 AP3 = [[] for i in range(line_num)]
 for n in range(line_num):
-  with open('/home/zhangy/' + file_name[n], 'r') as file:
+  with open(os.path.join(ROOT_PATH, file_name[n]), 'r') as file:
     anna = file.readlines()
     for i in range(len(anna)):
       if anna[i].split()[0] == 'car_detection':

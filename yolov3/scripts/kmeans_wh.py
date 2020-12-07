@@ -11,7 +11,7 @@ class Box():
         self.h = h
 
 
-label_path = "/home/zhangy/yolov3/data/dataset/kitti_train3d.txt"
+label_path = "../data/dataset/kitti_train3d.txt"
 label_files = []
 f = open(label_path)
 for line in f:

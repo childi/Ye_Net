@@ -16,16 +16,14 @@ from avod.builders.dataset_builder import DatasetBuilder
 from avod.core.models.avod_model import AvodModel
 from avod.core.models.rpn_model import RpnModel
 from avod.core.evaluator import Evaluator
-sys.path.append('/home/zhangy/avod')
-sys.path.append('/home/zhangy/avod/wavedata')
 
 
 def inference(model_config, eval_config,
               dataset_config, data_split,
               ckpt_indices):
 
-    # predicted_dir_path = '/home/zhangy/yolov3/mAP/predicted'
-    # ground_truth_dir_path = '/home/zhangy/yolov3/mAP/ground-truth'
+    # predicted_dir_path = '../../yolov3/mAP/predicted'
+    # ground_truth_dir_path = '../../yolov3/mAP/ground-truth'
     # if os.path.exists(predicted_dir_path): shutil.rmtree(predicted_dir_path)
     # if os.path.exists(ground_truth_dir_path): shutil.rmtree(ground_truth_dir_path)
     # os.mkdir(predicted_dir_path)
@@ -128,7 +126,7 @@ def main(_):
     # Read the config from the experiment folder
     # experiment_config_path = avod.root_dir() + '/data/outputs/' +\
     #     args.checkpoint_name + '/' + experiment_config
-    experiment_config_path = '/home/zhangy/avod/avod/configs/' + experiment_config
+    experiment_config_path = '../configs/' + experiment_config
 
     model_config, _, eval_config, dataset_config = \
         config_builder.get_configs_from_pipeline_file(
